@@ -55,7 +55,8 @@ public class MainVerticle extends AbstractVerticle {
     final Future<Void> future = Future.future();
     poller = new BackgroundPoller(vertx, registry);
     final Router router = Router.router(vertx);
-    router.route().handler(CorsHandler.create("*"));
+    router.route().handler(CorsHandler.create(".*.")
+            .allowedMethod(io.vertx.core.http.HttpMethod.DELETE));
     router.route().handler(BodyHandler.create());
     vertx.setPeriodic(1000 * 60, timerId -> poller.pollServices());
     setRoutes(router);

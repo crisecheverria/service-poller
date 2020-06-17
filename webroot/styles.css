@@ -1,0 +1,221 @@
+body{
+      margin: 0;
+      font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
+      font-size: 1rem;
+      font-weight: 500;
+      line-height: 1.4;
+      color: #0e2c38;
+    }
+    main {
+      width: 100%;
+      max-width: 960px;
+      margin: 4rem auto;
+    }
+
+    .notification {
+        color: #fff;
+        background-color: #ed7595;
+        margin: 16px 0;
+        padding: 25px;
+    }
+
+    /* Form */
+    .form-inline {
+      display: flex;
+      flex-flow: row wrap;
+      align-items: center;
+    }
+
+    .form-inline label {
+      margin: 5px 10px 5px 0;
+    }
+
+    .form-inline input {
+      vertical-align: middle;
+      margin: 5px 10px 5px 0;
+      padding: 10px;
+      background-color: #fff;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+    }
+
+    .form-inline button {
+      padding: 10px 20px;
+      background-color: #39cfba;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      color: white;
+      cursor: pointer;
+    }
+
+    .update {
+      padding: 10px 20px;
+      background-color: #0e2c38;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      color: white;
+      cursor: pointer;
+    }
+
+    .delete {
+      padding: 10px 20px;
+      background-color: #ed7595;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      color: white;
+      cursor: pointer;
+    }
+
+    .form-inline button:hover {
+      background-color: #2ca292;
+      transition: all .2s ease-in-out;
+    }
+
+    /* Table */
+
+    table {
+      border: 1px solid #ccc;
+      border-collapse: collapse;
+      margin: 20px 0;
+      padding: 0;
+      width: 100%;
+      table-layout: fixed;
+    }
+
+    table caption {
+      font-size: 1.5em;
+      margin: .5em 0 .75em;
+    }
+
+    table tr {
+      background-color: #ffffff;
+      border: 1px solid #ddd;
+      padding: .35em;
+    }
+
+    table th {
+      background-color: #f0faf8;
+    }
+
+    table th,
+    table td {
+      padding: .625em;
+      text-align: center;
+    }
+
+    table th {
+      font-size: .85em;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+    }
+
+    @media screen and (max-width: 600px) {
+      body {
+        margin: 20px;
+      }
+      .form-inline input {
+        margin: 10px 0;
+      }
+
+      .form-inline {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      table {
+        border: 0;
+      }
+
+      table caption {
+        font-size: 1.3em;
+      }
+
+      table thead {
+        border: none;
+        clip: rect(0 0 0 0);
+        height: 1px;
+        margin: -1px;
+        overflow: hidden;
+        padding: 0;
+        position: absolute;
+        width: 1px;
+      }
+
+      table tr {
+        border-bottom: 3px solid #ddd;
+        display: block;
+        margin-bottom: .625em;
+      }
+
+      table td {
+        border-bottom: 1px solid #ddd;
+        display: block;
+        font-size: .8em;
+        text-align: right;
+      }
+
+      table td::before {
+        /*
+        * aria-label has no advantage, it won't be read inside a table
+        content: attr(aria-label);
+        */
+        content: attr(data-label);
+        float: left;
+        font-weight: bold;
+        text-transform: uppercase;
+      }
+
+      table td:last-child {
+        border-bottom: 0;
+      }
+    }
+
+    @media screen and (max-width: 960px) {
+          body {
+            margin: 20px;
+          }
+    }
+
+    /* Countdown */
+
+    #countdown {
+      position: relative;
+      margin: auto;
+      margin-top: 10px;
+      height: 40px;
+      width: 40px;
+      text-align: center;
+    }
+
+    #countdown-number {
+      display: inline-block;
+      line-height: 40px;
+    }
+
+    svg {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 40px;
+      height: 40px;
+      transform: rotateY(-180deg) rotateZ(-90deg);
+    }
+
+    svg circle {
+      stroke-dasharray: 113px;
+      stroke-dashoffset: 0px;
+      stroke-linecap: round;
+      stroke-width: 2px;
+      stroke: #39cfba;
+      fill: none;
+      animation: countdown 3s linear infinite forwards;
+    }
+
+    @keyframes countdown {
+      from {
+        stroke-dashoffset: 0px;
+      }
+      to {
+        stroke-dashoffset: 113px;
+      }
+    }

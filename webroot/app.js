@@ -8,32 +8,66 @@ const endPoint = "http://localhost:8080/service"
 const ServicePoller = () => {
   const [services, setServices] = React.useState([]);
   const [error, setError] = React.useState(null);
-  const [httResponse, setHttpResponse] = React.useState("");
+  const [httResponse, setHttpResponse] = React.useState(true);
+  const nameInput = React.useRef("");
+  const urlInput = React.useRef("");
 
   const parseData = (services) => {
     const dataParsed = services.map((service) => service.status).map((status) => JSON.parse(status))
     setServices(dataParsed)
   }
 
-  React.useEffect(() => {
+  const fetchData = () => {
     fetch(endPoint)
-      .then((res) => res.json())
-      .then((data) => parseData(data))
-      .catch(setError);
+       .then((res) => res.json())
+       .then((data) => parseData(data))
+       .catch(setError);
+  }
+
+  React.useEffect(() => {
+    if (httResponse)
+        fetchData()
   }, [httResponse]);
+
+  React.useEffect(() => {
+      if (services.length > 0)
+      {
+        const interval = setInterval(() => {
+        fetchData()
+      }, 3000)
+
+        return () => clearInterval(interval)
+      }
+  }, [services]);
+
+  const clearInputs = () => {
+    nameInput.current.value = ""
+    urlInput.current.value = ""
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault()
 
     const inputs = {
-      name: document.getElementById("name-input").value,
-      url: document.getElementById("url-input").value
+      name: nameInput.current.value,
+      url: urlInput.current.value
     }
 
      fetch(endPoint, {
        method: "post",
        body: JSON.stringify(inputs),
-     }).then((res) => setHttpResponse(res.statusText))
+     })
+     .then((res) => setHttpResponse(res))
+     .catch(setError);
+
+     clearInputs();
+  }
+
+  const handleDelete = (name) => {
+    fetch(endPoint, {
+       method: "DELETE",
+       body: JSON.stringify({ name })
+    }).then((res) => setHttpResponse(res)).catch(setError);
   }
 
   return html`
@@ -42,28 +76,44 @@ const ServicePoller = () => {
 
       ${error != null &&
         html`
-          <div style=${{ color: "red" }}>${error.message}</div>
+          <div className="notification">${error.message}</div>
         `}
 
       <form className="form-inline" onSubmit=${handleSubmit}>
         <label>Name:</label>
-        <input type="text" id="name-input" />
+        <input type="text" ref=${nameInput} required />
 
         <label>URL:</label>
-        <input type="url" id="url-input" />
+        <input type="url" ref=${urlInput} required />
 
         <button type="submit">Save</button>
       </form>
 
+      ${services.length > 0 &&
+        html`
+            <div id="countdown">
+               <div id="countdown-number"></div>
+               <svg>
+                  <circle r="18" cx="20" cy="20"></circle>
+               </svg>
+            </div>
+      `}
 
-      ${services &&
+      ${services.length > 0 &&
+         html`
+            <p style=${{ textAlign: "right" }}>Note: Fetching data every 3 seconds.</>
+         `
+      }
+
+      ${services.length > 0 &&
         html`
             <table>
                 <thead>
                     <tr>
                         <th scope="col">Name</th>
                         <th scope="col">URL</th>
-                        <th scope="col">Actions</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">Delete</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -73,13 +123,15 @@ const ServicePoller = () => {
                                 <tr key=${s.name}>
                                     <td data-label="Name">${s.name}</td>
                                     <td data-label="URL">${s.url}</td>
-                                    <td data-label="Actions">Update</td>
+                                    <td data-label="Status">${s.status}</td>
+                                    <td data-label="Delete"><button className="delete" onClick=${() => handleDelete(s.name)}>Delete</button></td>
                                 </tr>
                             `))
                     }
 
                 </tbody>
-            </table>`
+            </table>
+         `
       }
     </main>
   `;
