@@ -23,7 +23,7 @@ I used a lot of styling to make it look good in both small & more significant sc
 
 The last thing, it took me around 8 hours to complete the challenge. Mainly because I spend a couple of hours just trying to run the Backend with IntelliJ and Gradle, gladly one friend expert with Java gives me a couple of recommendations for that. And I was also thinking about the UI of the Frontend, and understanding how the Backend works.
 
-# KRY code assignment
+# Code assignment
 
 One of our developers built a simple service poller.
 The service consists of a backend service written in Vert.x (https://vertx.io/) that keeps a list of services (defined by a URL), and periodically does a HTTP GET to each and saves the response ("OK" or "FAIL").
@@ -47,7 +47,7 @@ Put the code in a git repo on GitHub and send us the link (niklas.holmqvist@kry.
 Good luck!
 
 # Building
-We recommend using IntelliJ as it's what we use day to day at the KRY office.
+We recommend using IntelliJ.
 In intelliJ, choose
 ```
 New -> New from existing sources -> Import project from external model -> Gradle -> select "use gradle wrapper configuration"
