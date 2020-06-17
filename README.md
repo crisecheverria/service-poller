@@ -7,7 +7,7 @@ Also, Nelly Jonsson told me to focus only on the Frontend Tracks and leave the B
 Frontend/Web track:
 - We want full create/update/delete functionality for services
 
-For this track, I only missed the /update functionality, and the reason for that is because it is not implemented in the Backend and because of lack of time to do it my self. But the logic for /post & /update from the frontend side is similar.
+For this track, I only missed the /update functionality, and the reason for that is because it is not implemented in the Backend and because of lack of time to do it my self (checking vertx.io documentation for that). But the logic for /post & /update from the frontend side is similar.
 
 Frontend/Web track:
 - The poller results are not automatically shown to the user (you have to reload the page to see results)
