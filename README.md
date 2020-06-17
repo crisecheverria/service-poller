@@ -1,3 +1,28 @@
+# My Implementation
+
+I focus on the Frontend track of the assignment, I don't have experience working with Java, but I also made a couple of small adjustments to the backend server to enable CORS (sorry for this :)), you can delete it of course, but this was the only way for me to run both Backend & Frontend because of my lack of knowledge of Java.
+
+Also, Nelly Jonsson told me to focus only on the Frontend Tracks and leave the Backend untouchable (sorry for the small change about CORS).
+
+Frontend/Web track:
+- We want full create/update/delete functionality for services
+
+For this track, I only missed the /update functionality, and the reason for that is because it is not implemented in the Backend and because of lack of time to do it my self. But the logic for /post & /update from the frontend side is similar.
+
+Frontend/Web track:
+- The poller results are not automatically shown to the user (you have to reload the page to see results)
+
+I solved this by adding a 3 seconds interval to Fetch data from the server every 3 seconds, I also added an SVG for that, like a countdown—so no need to refresh every time.
+
+When you POST or DELETE a service, it will retrigger a re-render of the component.
+
+Frontend/Web track:
+- Make sure the UI is as user friendly and accessible as possible, both on desktop and touch devices
+
+I used a lot of styling to make it look good in both small & more significant screens using Media Queries. I also tried to mimic the same KRY colors UI.
+
+The last thing, it took me around 8 hours to complete the challenge. Mainly because I spend a couple of hours just trying to run the Backend with IntelliJ and Gradle, gladly one friend expert with Java gives me a couple of recommendations for that. And I was also thinking about the UI of the Frontend, and understanding how the Backend works.
+
 # KRY code assignment
 
 One of our developers built a simple service poller.
